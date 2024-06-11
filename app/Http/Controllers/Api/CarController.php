@@ -47,15 +47,16 @@ class CarController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $car = Car::findOrFail($id);
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'registration_number' => 'nullable|string|max:255',
+            'registration_number' => 'nullable|string|max:255|unique:cars,registration_number,'.$car->id,
             'is_registered' => 'required|boolean',
         ]);
 
+        // Update the car
         $car->update($request->all());
-
-        return response()->json($car);
     }
 
     /**

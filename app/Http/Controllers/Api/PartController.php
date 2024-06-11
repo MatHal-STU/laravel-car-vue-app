@@ -48,12 +48,16 @@ class PartController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        $part = Part::findOrFail($id);
+
+        // Validate the request data
         $request->validate([
             'name' => 'required|string|max:255',
             'serialnumber' => 'required|string|max:255|unique:parts,serialnumber,'.$part->id,
             'car_id' => 'required|exists:cars,id',
         ]);
 
+        // Update the part
         $part->update($request->all());
 
         return response()->json($part);

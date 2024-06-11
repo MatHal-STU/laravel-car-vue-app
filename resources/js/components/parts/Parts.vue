@@ -7,7 +7,6 @@
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           <th class="px-4 py-3"><input type="checkbox" @change="toggleSelectAll" v-model="selectAll"></th>
-          <th class="px-4 py-3">ID</th>
           <th class="px-4 py-3">Name</th>
           <th class="px-4 py-3">Serial Number</th>
           <th class="px-4 py-3">Car Name</th>
@@ -17,7 +16,6 @@
       <tbody>
         <tr v-for="part in parts" :key="part.id" class="border-b">
           <td class="px-4 py-3"><input type="checkbox" v-model="selectedParts" :value="part.id"></td>
-          <td class="px-4 py-3 font-medium text-gray-900">{{ part.id }}</td>
           <td class="px-4 py-3 font-medium text-gray-900">{{ part.name }}</td>
           <td class="px-4 py-3">{{ part.serialnumber }}</td>
           <td class="px-4 py-3">{{ part.car ? part.car.name : 'N/A' }}</td>

@@ -45,9 +45,9 @@ const vuetify = createVuetify({
     icons: {
         defaultSet: 'mdi',
         sets: {
-          mdi,
+            mdi,
         },
-      },
+    },
 });
 
 export default vuetify;
