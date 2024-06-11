@@ -1,23 +1,23 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <v-app>
+        <NavBar />
+        <v-main>
+            <router-view></router-view>
+        </v-main>
+    </v-app>
 </template>
 
 <script>
-    export default {
-        mounted() {
-            console.log('Component mounted.')
-        }
+import NavBar from './NavBar.vue';
+
+export default {
+    name: 'ExampleComponent',
+    components: {
+        NavBar,
+    },
+    mounted() {
+        console.log('Component mounted.')
     }
+};
 </script>
+
