@@ -13,7 +13,9 @@ class PartController extends Controller
      */
     public function index()
     {
-        return Part::all();
+        $parts = Part::with('car')->get();
+
+        return response()->json($parts);
     }
 
     /**
@@ -37,6 +39,7 @@ class PartController extends Controller
      */
     public function show(string $id)
     {
+        $part = Part::with('car')->findOrFail($id);
         return response()->json($part);
     }
 
@@ -61,6 +64,8 @@ class PartController extends Controller
      */
     public function destroy(string $id)
     {
+        $part = part::findOrFail($id);
+
         $part->delete();
 
         return response()->json(null, 204);

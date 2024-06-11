@@ -35,7 +35,7 @@
     },
     methods: {
       async submitForm() {
-        await axios.post('/api/cars', this.car);
+        await axios.post('/cars', this.car);
         this.$router.push('/cars');
       }
     }

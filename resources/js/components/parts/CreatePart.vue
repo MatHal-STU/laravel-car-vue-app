@@ -34,12 +34,12 @@
       };
     },
     async created() {
-      const response = await axios.get('/api/cars');
+      const response = await axios.get('/cars');
       this.cars = response.data;
     },
     methods: {
       async submitForm() {
-        await axios.post('/api/parts', this.part);
+        await axios.post('/parts', this.part);
         this.$router.push('/parts');
       }
     }

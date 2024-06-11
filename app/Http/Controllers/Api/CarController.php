@@ -37,6 +37,8 @@ class CarController extends Controller
      */
     public function show(string $id)
     {
+        $car = Car::findOrFail($id);
+
         return response()->json($car);
     }
 
@@ -61,6 +63,8 @@ class CarController extends Controller
      */
     public function destroy(string $id)
     {
+        $car = Car::findOrFail($id);
+        $car->parts()->delete();
         $car->delete();
 
         return response()->json(null, 204);
