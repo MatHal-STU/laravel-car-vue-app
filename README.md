@@ -13,7 +13,9 @@
 - Composer (with xml, zip and curl extensions)
 - NODE 22.2
 - MySql Database
+
 or
+
 - Docker
 
 **Set up .env**
