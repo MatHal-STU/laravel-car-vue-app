@@ -12,15 +12,15 @@
                 <form @submit.prevent="updatePart">
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" v-model="editPart.name" required>
+                        <input type="text" id="name" class="form-control" v-model="editPart.name" autocomplete="name" required>
                     </div>
                     <div class="mb-3">
                         <label for="serialnumber" class="form-label">Serial Number</label>
-                        <input type="text" class="form-control" v-model="editPart.serialnumber" required>
+                        <input type="text" id="serialnumber" class="form-control" v-model="editPart.serialnumber" autocomplete="off" required>
                     </div>
                     <div class="mb-3">
                         <label for="car_id" class="form-label">Car</label>
-                        <select class="form-control" v-model="editPart.car_id" required>
+                        <select id="car_id" class="form-control" v-model="editPart.car_id" autocomplete="off" required>
                             <option v-for="car in cars" :key="car.id" :value="car.id">
                                 {{ car.name }}
                             </option>
@@ -36,8 +36,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
     name: 'PartDetails',
     data() {

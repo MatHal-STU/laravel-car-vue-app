@@ -4,12 +4,12 @@
     <form class="py-3 flex items-center">
       <div class="row w-100">
         <div class="col">
-          <label class="sr-only">Search</label>
-          <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
+          <label for="search" class="sr-only">Search</label>
+          <input type="text" id="search" name="search" v-model="searchQuery" class="form-control" placeholder="Search">
         </div>
         <div class="col">
-          <label class="sr-only">Filter</label>
-          <select v-model="registrationFilter" class="form-control">
+          <label for="filter" class="sr-only">Filter</label>
+          <select id="filter" name="filter" v-model="registrationFilter" class="form-control">
             <option value="">All</option>
             <option value="registered">Registered</option>
             <option value="notregistered">Not Registered</option>
@@ -22,7 +22,7 @@
     <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
-          <th class="px-4 py-3" scope="col"><input type="checkbox" @change="toggleSelectAll" v-model="selectAll"></th>
+          <th class="px-4 py-3" scope="col"><input type="checkbox" id="selectAll" @change="toggleSelectAll" v-model="selectAll" name="selectAll"></th>
           <th class="px-4 py-3" scope="col">Name</th>
           <th class="px-4 py-3" scope="col">Registration Number</th>
           <th class="px-4 py-3" scope="col">Is Registered</th>
@@ -31,7 +31,7 @@
       </thead>
       <tbody>
         <tr v-for="car in filteredCars" :key="car.id" class="border-b">
-          <td class="px-4 py-3"><input type="checkbox" v-model="selectedCars" :value="car.id"></td>
+          <td class="px-4 py-3"><input type="checkbox" :id="'selectCar' + car.id" v-model="selectedCars" :value="car.id" :name="'selectCar' + car.id"></td>
           <td class="px-4 py-3 font-medium text-gray-900">{{ car.name }}</td>
           <td class="px-4 py-3">{{ car.registration_number }}</td>
           <td class="px-4 py-3">{{ car.is_registered ? 'Yes' : 'No' }}</td>
@@ -45,8 +45,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'Cars',
   data() {

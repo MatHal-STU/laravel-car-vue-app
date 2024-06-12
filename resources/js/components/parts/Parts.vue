@@ -2,9 +2,9 @@
   <div class="bg-white relative border rounded-lg p-5">
     <h1 class="text-xl font-bold mb-4">Parts</h1>
     <form class="py-3 flex items-center">
-      <label class="sr-only">Search</label>
+      <label for="search" class="sr-only">Search</label>
       <div class="relative w-full">
-        <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
+        <input type="text" id="search" name="search" v-model="searchQuery" class="form-control" placeholder="Search" autocomplete="off">
       </div>
     </form>
     <router-link class="btn btn-primary mt-4" to="/parts/create">Add New Part</router-link>
@@ -12,7 +12,7 @@
     <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
-          <th class="px-4 py-3"><input type="checkbox" @change="toggleSelectAll" v-model="selectAll"></th>
+          <th class="px-4 py-3"><input type="checkbox" id="selectAll" name="selectAll" @change="toggleSelectAll" v-model="selectAll"></th>
           <th class="px-4 py-3">Name</th>
           <th class="px-4 py-3">Serial Number</th>
           <th class="px-4 py-3">Car Name</th>
@@ -21,7 +21,7 @@
       </thead>
       <tbody>
         <tr v-for="part in filteredParts" :key="part.id" class="border-b">
-          <td class="px-4 py-3"><input type="checkbox" v-model="selectedParts" :value="part.id"></td>
+          <td class="px-4 py-3"><input type="checkbox" :id="'selectPart' + part.id" :name="'selectPart' + part.id" v-model="selectedParts" :value="part.id"></td>
           <td class="px-4 py-3 font-medium text-gray-900">{{ part.name }}</td>
           <td class="px-4 py-3">{{ part.serialnumber }}</td>
           <td class="px-4 py-3">{{ part.car ? part.car.name : 'N/A' }}</td>
@@ -35,8 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   name: 'Parts',
   data() {

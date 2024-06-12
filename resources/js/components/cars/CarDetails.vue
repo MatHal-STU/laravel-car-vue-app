@@ -11,17 +11,16 @@
             <div v-else>
                 <form @submit.prevent="updateCar">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" v-model="editCar.name" required>
+                        <label for="editCarName" class="form-label">Name</label>
+                        <input type="text" id="editCarName" name="car-name" class="form-control" v-model="editCar.name" autocomplete="name" required>
                     </div>
                     <div class="mb-3">
-                        <label for="registration_number" class="form-label">Registration Number</label>
-                        <input type="text" class="form-control" v-model="editCar.registration_number"
-                            :required="editCar.is_registered">
+                        <label for="editCarRegistrationNumber" class="form-label">Registration Number</label>
+                        <input type="text" id="editCarRegistrationNumber" name="registration-number" class="form-control" v-model="editCar.registration_number" autocomplete="off" :required="editCar.is_registered">
                     </div>
                     <div class="mb-3">
-                        <label for="is_registered" class="form-label">Is Registered</label>
-                        <select class="form-control" v-model="editCar.is_registered" required>
+                        <label for="editCarIsRegistered" class="form-label">Is Registered</label>
+                        <select id="editCarIsRegistered" name="is-registered" class="form-control" v-model="editCar.is_registered" autocomplete="off" required>
                             <option value="1">Yes</option>
                             <option value="0">No</option>
                         </select>
@@ -36,8 +35,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
     name: 'CarDetails',
     data() {

@@ -4,21 +4,21 @@
     <form @submit.prevent="submitForm" novalidate>
       <div class="mb-3">
         <label for="name" class="form-label">Part Name</label>
-        <input type="text" id="name" class="form-control" v-model="part.name" :class="{ 'is-invalid': isSubmitted && !part.name }" required>
+        <input type="text" id="name" name="part-name" class="form-control" v-model="part.name" autocomplete="off" :class="{ 'is-invalid': isSubmitted && !part.name }" required>
         <div class="invalid-feedback">
           Part name is required.
         </div>
       </div>
       <div class="mb-3">
         <label for="serialnumber" class="form-label">Serial Number</label>
-        <input type="text" id="serialnumber" class="form-control" v-model="part.serialnumber" :class="{ 'is-invalid': isSubmitted && !part.serialnumber }" required>
+        <input type="text" id="serialnumber" name="serial-number" class="form-control" v-model="part.serialnumber" autocomplete="off" :class="{ 'is-invalid': isSubmitted && !part.serialnumber }" required>
         <div class="invalid-feedback">
           Serial number is required.
         </div>
       </div>
       <div class="mb-3">
         <label for="car_id" class="form-label">Car</label>
-        <select id="car_id" class="form-control" v-model="part.car_id" :class="{ 'is-invalid': isSubmitted && !part.car_id }" required>
+        <select id="car_id" name="car-id" class="form-control" v-model="part.car_id" autocomplete="off" :class="{ 'is-invalid': isSubmitted && !part.car_id }" required>
           <option value="" disabled>Select a car</option>
           <option v-for="car in cars" :value="car.id" :key="car.id">{{ car.name }}</option>
         </select>
@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {

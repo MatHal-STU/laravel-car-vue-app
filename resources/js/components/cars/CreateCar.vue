@@ -4,21 +4,21 @@
     <form @submit.prevent="submitForm" novalidate>
       <div class="mb-3">
         <label for="name" class="form-label">Car Name</label>
-        <input type="text" id="name" class="form-control" v-model="car.name" :class="{ 'is-invalid': isSubmitted && !car.name }" required>
+        <input type="text" id="name" name="car-name" class="form-control" v-model="car.name" autocomplete="name" :class="{ 'is-invalid': isSubmitted && !car.name }" required>
         <div class="invalid-feedback">
           Car name is required.
         </div>
       </div>
       <div class="mb-3">
         <label for="registration_number" class="form-label">Registration Number</label>
-        <input type="text" id="registration_number" class="form-control" v-model="car.registration_number" :class="{ 'is-invalid': isSubmitted && car.is_registered === '1' && !car.registration_number }" :required="car.is_registered === '1'">
+        <input type="text" id="registration_number" name="registration-number" class="form-control" v-model="car.registration_number" autocomplete="off" :class="{ 'is-invalid': isSubmitted && car.is_registered === '1' && !car.registration_number }" :required="car.is_registered === '1'">
         <div class="invalid-feedback">
           Registration number is required when the car is registered.
         </div>
       </div>
       <div class="mb-3">
         <label for="is_registered" class="form-label">Is Registered</label>
-        <select id="is_registered" class="form-control" v-model="car.is_registered" :class="{ 'is-invalid': isSubmitted && !car.is_registered }" required>
+        <select id="is_registered" name="is-registered" class="form-control" v-model="car.is_registered" autocomplete="off" :class="{ 'is-invalid': isSubmitted && !car.is_registered }" required>
           <option value="1">Yes</option>
           <option value="0">No</option>
         </select>
@@ -33,8 +33,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
