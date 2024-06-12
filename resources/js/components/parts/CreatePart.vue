@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-white relative border rounded-lg p-5 ">
     <h1>Add New Part</h1>
     <form @submit.prevent="submitForm">
       <div class="mb-3">
@@ -17,6 +17,7 @@
         </select>
       </div>
       <button type="submit" class="btn btn-primary">Add Part</button>
+      <router-link class="btn btn-secondary ml-2" to="/parts">Back</router-link>
     </form>
   </div>
 </template>

@@ -1,9 +1,15 @@
 <template>
-  <div class="bg-white relative border rounded-lg">
-    <h1 class="text-xl font-bold p-6">Parts</h1>
-    <router-link class="btn btn-primary ml-6" to="/parts/create">Add New Part</router-link>
+  <div class="bg-white relative border rounded-lg p-5">
+    <h1 class="text-xl font-bold mb-4">Parts</h1>
+    <form class="py-3 flex items-center">
+      <label class="sr-only">Search</label>
+      <div class="relative w-full">
+        <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
+      </div>
+    </form>
+    <router-link class="btn btn-primary" to="/parts/create">Add New Part</router-link>
     <button class="btn btn-danger ml-4" @click="deleteSelected">Delete Selected</button>
-    <table class="w-full text-sm text-left text-gray-500 mt-6">
+    <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           <th class="px-4 py-3"><input type="checkbox" @change="toggleSelectAll" v-model="selectAll"></th>
@@ -14,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="part in parts" :key="part.id" class="border-b">
+        <tr v-for="part in filteredParts" :key="part.id" class="border-b">
           <td class="px-4 py-3"><input type="checkbox" v-model="selectedParts" :value="part.id"></td>
           <td class="px-4 py-3 font-medium text-gray-900">{{ part.name }}</td>
           <td class="px-4 py-3">{{ part.serialnumber }}</td>
@@ -38,6 +44,7 @@ export default {
       parts: [],
       selectedParts: [],
       selectAll: false,
+      searchQuery: '',
     };
   },
   async created() {
@@ -46,6 +53,17 @@ export default {
       this.parts = response.data;
     } catch (error) {
       console.error('Error fetching parts:', error);
+    }
+  },
+  computed: {
+    filteredParts() {
+      return this.parts.filter(part => {
+        const name = part.name ? part.name.toLowerCase() : '';
+        const serialnumber = part.serialnumber ? part.serialnumber.toLowerCase() : '';
+        const carName = part.car && part.car.name ? part.car.name.toLowerCase() : 'n/a';
+        const query = this.searchQuery.toLowerCase();
+        return name.includes(query) || serialnumber.includes(query) || carName.includes(query);
+      });
     }
   },
   watch: {

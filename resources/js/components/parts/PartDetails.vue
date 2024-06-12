@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white relative border rounded-lg p-6">
+    <div class="bg-white relative border rounded-lg p-5 ">
         <h1 class="text-xl font-bold mb-4">Part Details</h1>
         <div v-if="part">
             <div v-if="!isEditing">

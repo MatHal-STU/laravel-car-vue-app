@@ -7,23 +7,21 @@
         <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
       </div>
     </form>
-    <router-link class="btn btn-primary mb-4" to="/cars/create">Add New Car</router-link>
-    <button class="btn btn-danger mb-4" @click="deleteSelected">Delete Selected</button>
-    <table class="w-full text-sm text-left text-gray-500 mt-6">
+    <router-link class="btn btn-primary" to="/cars/create">Add New Car</router-link>
+    <button class="btn btn-danger ml-4" @click="deleteSelected">Delete Selected</button>
+    <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
-          <th scope="col"><input type="checkbox" @change="toggleSelectAll" v-model="selectAll"></th>
-          <th scope="col">ID</th>
-          <th scope="col">Name</th>
-          <th scope="col">Registration Number</th>
-          <th scope="col">Is Registered</th>
-          <th scope="col" class="sr-only">Actions</th>
+          <th class="px-4 py-3" scope="col"><input type="checkbox" @change="toggleSelectAll" v-model="selectAll"></th>
+          <th class="px-4 py-3" scope="col">Name</th>
+          <th class="px-4 py-3" scope="col">Registration Number</th>
+          <th class="px-4 py-3" scope="col">Is Registered</th>
+          <th class="px-4 py-3 sr-only" scope="col" >Actions</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="car in filteredCars" :key="car.id" class="border-b">
           <td class="px-4 py-3"><input type="checkbox" v-model="selectedCars" :value="car.id"></td>
-          <td class="px-4 py-3 font-medium text-gray-900">{{ car.id }}</td>
           <td class="px-4 py-3 font-medium text-gray-900">{{ car.name }}</td>
           <td class="px-4 py-3">{{ car.registration_number }}</td>
           <td class="px-4 py-3">{{ car.is_registered ? 'Yes' : 'No' }}</td>
@@ -60,10 +58,10 @@ export default {
   computed: {
     filteredCars() {
       return this.cars.filter(car => {
-        return (
-          car.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          car.registration_number.toLowerCase().includes(this.searchQuery.toLowerCase())
-        );
+        const name = car.name ? car.name.toLowerCase() : '';
+        const registrationNumber = car.registration_number ? car.registration_number.toLowerCase() : '';
+        const query = this.searchQuery.toLowerCase();
+        return name.includes(query) || registrationNumber.includes(query);
       });
     }
   },
