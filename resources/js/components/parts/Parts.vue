@@ -7,8 +7,8 @@
         <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
       </div>
     </form>
-    <router-link class="btn btn-primary" to="/parts/create">Add New Part</router-link>
-    <button class="btn btn-danger ml-4" @click="deleteSelected">Delete Selected</button>
+    <router-link class="btn btn-primary mt-4" to="/parts/create">Add New Part</router-link>
+    <button class="btn btn-danger ml-4 mt-4" @click="deleteSelected">Delete Selected</button>
     <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>

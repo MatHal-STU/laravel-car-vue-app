@@ -1,22 +1,24 @@
 <template>
-  <div class="bg-white relative border rounded-lg p-5 ">
+  <div class="bg-white relative border rounded-lg p-5">
     <h1 class="text-xl font-bold mb-4">Cars</h1>
     <form class="py-3 flex items-center">
-      <label class="sr-only">Search</label>
-      <div class="relative flex-1">
-        <input type="text" v-model="searchQuery" class="form-control w-full" placeholder="Search">
-      </div>
-      <div class="flex-1">
-        <label class="sr-only">Filter</label>
-        <select v-model="registrationFilter" class="form-control w-full">
-          <option value="">All</option>
-          <option value="registered">Registered</option>
-          <option value="notregistered">Not Registered</option>
-        </select>
+      <div class="row w-100">
+        <div class="col">
+          <label class="sr-only">Search</label>
+          <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
+        </div>
+        <div class="col">
+          <label class="sr-only">Filter</label>
+          <select v-model="registrationFilter" class="form-control">
+            <option value="">All</option>
+            <option value="registered">Registered</option>
+            <option value="notregistered">Not Registered</option>
+          </select>
+        </div>
       </div>
     </form>
     <router-link class="btn btn-primary mt-4" to="/cars/create">Add New Car</router-link>
-    <button class="btn btn-danger ml-4 mt-4" @click="deleteSelected">Delete Selected</button>
+    <button class="btn btn-danger ml-2 mt-4" @click="deleteSelected">Delete Selected</button>
     <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
