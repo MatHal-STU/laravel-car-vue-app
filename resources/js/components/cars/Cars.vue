@@ -1,14 +1,22 @@
 <template>
   <div class="bg-white relative border rounded-lg p-5 ">
     <h1 class="text-xl font-bold mb-4">Cars</h1>
-    <form class="py-3 px4 flex items-center">
+    <form class="py-3 flex items-center">
       <label class="sr-only">Search</label>
-      <div class="ralative w-full">
-        <input type="text" v-model="searchQuery" class="form-control" placeholder="Search">
+      <div class="relative flex-1">
+        <input type="text" v-model="searchQuery" class="form-control w-full" placeholder="Search">
+      </div>
+      <div class="flex-1">
+        <label class="sr-only">Filter</label>
+        <select v-model="registrationFilter" class="form-control w-full">
+          <option value="">All</option>
+          <option value="registered">Registered</option>
+          <option value="notregistered">Not Registered</option>
+        </select>
       </div>
     </form>
-    <router-link class="btn btn-primary" to="/cars/create">Add New Car</router-link>
-    <button class="btn btn-danger ml-4" @click="deleteSelected">Delete Selected</button>
+    <router-link class="btn btn-primary mt-4" to="/cars/create">Add New Car</router-link>
+    <button class="btn btn-danger ml-4 mt-4" @click="deleteSelected">Delete Selected</button>
     <table class="w-full text-sm text-left text-gray-500 mt-6 table table-hover">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
@@ -16,7 +24,7 @@
           <th class="px-4 py-3" scope="col">Name</th>
           <th class="px-4 py-3" scope="col">Registration Number</th>
           <th class="px-4 py-3" scope="col">Is Registered</th>
-          <th class="px-4 py-3 sr-only" scope="col" >Actions</th>
+          <th class="px-4 py-3 sr-only" scope="col">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -45,6 +53,7 @@ export default {
       selectedCars: [],
       selectAll: false,
       searchQuery: '',
+      registrationFilter: '',
     };
   },
   async created() {
@@ -61,7 +70,11 @@ export default {
         const name = car.name ? car.name.toLowerCase() : '';
         const registrationNumber = car.registration_number ? car.registration_number.toLowerCase() : '';
         const query = this.searchQuery.toLowerCase();
-        return name.includes(query) || registrationNumber.includes(query);
+        const matchesQuery = name.includes(query) || registrationNumber.includes(query);
+        const matchesFilter = this.registrationFilter === ''
+          || (this.registrationFilter === 'registered' && car.is_registered)
+          || (this.registrationFilter === 'notregistered' && !car.is_registered);
+        return matchesQuery && matchesFilter;
       });
     }
   },
@@ -96,4 +109,3 @@ export default {
   },
 };
 </script>
-
